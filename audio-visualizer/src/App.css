@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&family=Scheherazade:wght@700&display=swap');
+
+body, html, #root, canvas {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Initial gradient with two colors */
+  background: linear-gradient(135deg, #002a2b, #0d31e0, #002a2b);
+  background-size: 300% 300%;
+  animation: moveGradient 15s infinite linear; /* Smooth and continuous motion */
+}
+
+canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+/* Top and Bottom Bars */
+.top-bar,
+.bottom-bar {
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(90deg, #001f3f, #004080, #001f3f); /* Subtle gradient */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Space between left and right content */
+  padding: 0 20px; /* Padding inside bars */
+  z-index: 3; /* Above other elements */
+}
+
+.top-bar {
+  top: 0;
+}
+
+.bottom-bar {
+  bottom: 0;
+}
+
+.top-bar span,
+.bottom-bar span {
+  font-family: 'Space Mono', monospace; /* Consistent font style */
+  font-size: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.top-bar .left,
+.bottom-bar .left {
+  display: flex;
+  align-items: center;
+}
+
+.top-bar .right,
+.bottom-bar .right {
+  display: flex;
+  align-items: center;
+}
+
+/* Style for icons or additional buttons (optional) */
+.bar-icon {
+  font-size: 20px;
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+/* Button Overlay */
+.button-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Ensure vertical stacking of text */
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  background: linear-gradient(145deg, #f5f5f5, #c9c9c9); /* Gradient for the button */
+  color: rgb(164, 164, 164);
+  font-size: 20px; /* Default font size for both lines */
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  user-select: none;
+  text-align: center; /* Center the text inside the button */
+  z-index: 2; /* Ensure it's above the frame */
+}
+
+.button-overlay span {
+  display: block; /* Ensure each text is on its own line */
+  line-height: 1.8; /* Spacing between lines */
+}
+
+/* English text styling */
+.button-overlay span:nth-child(1),
+.button-overlay span:nth-child(2),
+.button-overlay span:nth-child(3) {
+  font-family: 'Space Mono', monospace; /* Wide-spaced English font */
+  letter-spacing: 5px; /* Add extra spacing between English letters */
+}
+
+/* Outer Circular Frame */
+.circular-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 220px; /* Slightly larger than button */
+  width: 220px; /* Same as height to make it circular */
+  border-radius: 50%;
+  background: conic-gradient(#ffffff, #d7d7d7, #ffffff); /* Rotating gradient */
+  animation: rotateFrame 5s linear infinite; /* Rotate by default */
+  z-index: 1; /* Ensure it's behind the button */
+  transition: transform 0.3s ease, background-size 0.3s ease; /* Smooth scaling */
+}
+
+.button-overlay:hover ~ .circular-frame {
+  animation: rotateFrameHover 1s linear infinite; /* Faster rotation on hover */
+}
+
+.button-overlay:active ~ .circular-frame {
+  transform: translate(-50%, -50%) scale(1.5); /* Scale up on click */
+  background-size: 200%; /* Spread the gradient */
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@keyframes rotateFrame {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes rotateFrameHover {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Typewriter Effect */
+.typewriter {
+  position: absolute;
+  font-family: 'Space Mono', monospace; /* English typewriter font */
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.typewriter.ltr {
+  direction: ltr;
+}
+
+.typewriter.rtl {
+  direction: rtl;
+  font-family: 'Scheherazade', serif; /* Elegant Arabic typewriter font */
+  font-size: 20px; /* Slightly larger for readability */
+}
+
+.typewriter .cursor {
+  display: inline-block;
+  animation: blink 0.5s step-end infinite; /* Cursor blinking effect */
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
